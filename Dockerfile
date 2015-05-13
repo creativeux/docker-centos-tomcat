@@ -2,8 +2,6 @@ FROM centos:7
 
 MAINTAINER Aaron Stone <aaronastone@gmail.com>
 
-# http://download.oracle.com/otn/java/jdk/7u67-b01/server-jre-7u67-linux-x64.tar.gz
-
 RUN yum install -y tar \
   wget \
   gzip
