@@ -8,14 +8,6 @@ RUN yum install -y tar \
   wget \
   gzip
 
-# Install Java JRE 7u67
-RUN cd /opt && \
-  wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u67-b01/jre-7u67-linux-x64.tar.gz" && \
-  tar xvf jre-7u67-linux-x64.tar.gz && \
-  chown -R root: jre1.7.0_67 && \
-  rm /opt/jre-7u67-linux-x64.tar.gz && \
-  alternatives --install /usr/bin/java java /opt/jre1.7.0_67/bin/java 1
-
 # Install Java JDK 7u67
 RUN cd /opt && \
   wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u67-b01/jdk-7u67-linux-x64.tar.gz" && \
@@ -38,5 +30,11 @@ EXPOSE 8080 22
 # Expose our source directory.
 VOLUME ["/vagrant"]
 
+WORKDIR /opt/apache-tomcat-7.0.55
+
+RUN rm -rf webapps/ROOT
+
+COPY ROOT.war webapps/
+
 # Start Tomcat
-CMD ./opt/apache-tomcat-7.0.55/bin/startup.sh && tail -f /opt/apache-tomcat-7.0.55/logs/catalina.out
+CMD ./bin/startup.sh && tail -f logs/catalina.out
