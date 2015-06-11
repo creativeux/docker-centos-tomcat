@@ -32,7 +32,7 @@ WORKDIR /opt/apache-tomcat-7.0.55
 
 RUN rm -rf webapps/ROOT
 
-COPY ROOT.war webapps/
+COPY *.war webapps/
 
 # Start Tomcat
 CMD ./bin/startup.sh && tail -f logs/catalina.out
