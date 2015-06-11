@@ -22,15 +22,10 @@ RUN cd /opt && \
   chown -R root: apache-tomcat-7.0.55 && \
   rm /opt/apache-tomcat-7.0.55.tar.gz
 
-# Open port 8080 for app and 22 for SSH
-EXPOSE 8080 22
-
-# Expose our source directory.
-VOLUME ["/vagrant"]
+# Open port 8080 for app
+EXPOSE 8080
 
 WORKDIR /opt/apache-tomcat-7.0.55
-
-RUN rm -rf webapps/ROOT
 
 COPY *.war webapps/
 
